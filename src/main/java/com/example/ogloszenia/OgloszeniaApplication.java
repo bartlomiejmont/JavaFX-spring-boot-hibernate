@@ -15,12 +15,15 @@ public class OgloszeniaApplication extends Application {
 	private Parent rootNode;
 	private FXMLLoader fxmlLoader;
 
+
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	@Override
 	public void init() throws Exception {
+
+
 		springContext = SpringApplication.run(OgloszeniaApplication.class);
 		fxmlLoader = new FXMLLoader();
 		fxmlLoader.setControllerFactory(springContext::getBean);

@@ -16,16 +16,16 @@
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="600.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="84.0" text="Username" />
-                  <TextField id="usernameTextBox" />
+                  <TextField fx:id="usernameTextBox" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="600.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="85.0" text="Password" />
-                  <PasswordField id="passwordTextBox" />
+                  <PasswordField fx:id="passwordTextBox" />
                </children>
             </HBox>
-            <Button id="loginButton" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Login" />
+            <Button fx:id="loginButton" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#loginClick" prefHeight="25.0" prefWidth="62.0" text="Login" />
          </children>
          <opaqueInsets>
             <Insets />
