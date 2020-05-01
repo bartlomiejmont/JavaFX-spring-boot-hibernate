@@ -7,22 +7,22 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class OgloszeniaApplication extends Application {
-	private ConfigurableApplicationContext springContext;
-	private Parent rootNode;
+
+	public static ConfigurableApplicationContext springContext;
 	private FXMLLoader fxmlLoader;
 
 
 	public static void main(String[] args) {
-		launch(args);
+		Application.launch(args);
 	}
 
 	@Override
 	public void init() throws Exception {
-
 
 		springContext = SpringApplication.run(OgloszeniaApplication.class);
 		fxmlLoader = new FXMLLoader();
@@ -32,7 +32,7 @@ public class OgloszeniaApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception{
 		fxmlLoader.setLocation(getClass().getResource("/sample.fxml"));
-		rootNode = fxmlLoader.load();
+		Parent rootNode = fxmlLoader.load();
 
 		primaryStage.setTitle("Hello World");
 		Scene scene = new Scene(rootNode, 800, 600);
@@ -42,6 +42,8 @@ public class OgloszeniaApplication extends Application {
 
 	@Override
 	public void stop() {
-		springContext.stop();
+		springContext.stop() ;
 	}
+
+
 }

@@ -2,6 +2,7 @@ package com.example.ogloszenia.controller;
 
 import com.example.ogloszenia.model.User;
 import com.example.ogloszenia.repository.UserRepository;
+import com.example.ogloszenia.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,19 +15,25 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import lombok.SneakyThrows;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.example.ogloszenia.OgloszeniaApplication.springContext;
+
 @Controller
 public class SampleController implements Initializable {
 
     @Autowired
-    private UserRepository repository;
+    private UserService userService;
+
+
+    private FXMLLoader fxmlLoader;
 
 
     @FXML
@@ -40,12 +47,14 @@ public class SampleController implements Initializable {
 
     public void loginClick(ActionEvent actionEvent) throws IOException {
 
-        Parent parent = FXMLLoader.load(getClass().getResource("/adminView.fxml"));
-        Scene adminScene = new Scene(parent);
+        fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(springContext::getBean);
+        fxmlLoader.setLocation(getClass().getResource("/adminView.fxml"));
+        Parent rootNode = fxmlLoader.load();
+        Scene adminScene = new Scene(rootNode);
 
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(adminScene);
-        window.show();
 
     }
 
