@@ -1,4 +1,6 @@
-INSERT INTO user (login, email, password) VALUES
-('kaczor', 'karol@wp.pl', 'haslo1'),
-('kaska', 'kasia@gmail.com', 'kasia123'),
-('admin','admin@admin.pl','admin');
+INSERT INTO user (login, email, password, type) VALUES
+('kaczor', 'karol@wp.pl', 'haslo1','USER'),
+('kaska', 'kasia@gmail.com', 'kasia123','USER'),
+('admin','admin@admin.pl','admin','ADMIN'),
+('user','user@user.pl','user','USER'),
+('mod','mod@mod.pl','mod','MOD');

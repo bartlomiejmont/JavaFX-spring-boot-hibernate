@@ -1,6 +1,6 @@
 package com.example.ogloszenia.model;
 
-import com.example.ogloszenia.type.UserType;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,36 +8,33 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Builder
 @Data
 @RequiredArgsConstructor
 @NoArgsConstructor
-//@Table(name = "users")
-public class User {
-
+@AllArgsConstructor
+public class Adress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NonNull
     private long id;
 
     @NonNull
-    private String login;
+    private long userId;
 
     @NonNull
-    private String email;
+    private String city;
 
     @NonNull
-    private String password;
+    private String street;
 
-    @NonNull
-    @Enumerated(EnumType.STRING)
-    private UserType type;
+    @NotNull
+    private long flatNumber;
 
 }
