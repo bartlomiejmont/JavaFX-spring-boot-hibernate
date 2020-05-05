@@ -34,7 +34,6 @@ public class Adress {
     @NonNull
     private String street;
 
-    @NotNull
     private long flatNumber;
 
 }
