@@ -29,7 +29,7 @@ public class UserOpinion {
     private long userId;
 
     @NonNull
-    private long userOpinionId;
+    private long userGivingOpinionId;
 
     @NonNull
     private String description;
