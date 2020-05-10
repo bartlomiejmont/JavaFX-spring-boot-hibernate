@@ -7,23 +7,28 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ogloszenia.controller.AdminController">
    <children>
-      <VBox alignment="CENTER" layoutX="125.0" layoutY="50.0" prefHeight="300.0" prefWidth="350.0" spacing="20.0">
+      <VBox alignment="CENTER" layoutX="125.0" prefHeight="402.0" prefWidth="350.0" spacing="20.0">
          <children>
             <Button fx:id="usersButton" mnemonicParsing="false" onAction="#usersClick" prefWidth="100.0" text="Users">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefWidth="100.0" text="Jobs">
+            <Button fx:id="jobsButton" mnemonicParsing="false" prefWidth="100.0" text="Jobs">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefWidth="100.0" text="Messages">
+            <Button fx:id="messagesButton" mnemonicParsing="false" prefWidth="100.0" text="Messages">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
+            <Button fx:id="itemsButton" mnemonicParsing="false" prefWidth="100.0" text="Items" />
+            <Button fx:id="rentalsButton" mnemonicParsing="false" prefWidth="100.0" text="Rentals" />
+            <Button fx:id="housesButton" mnemonicParsing="false" prefWidth="100.0" text="Houses" />
+            <Button fx:id="opinionsButton" mnemonicParsing="false" prefWidth="100.0" text="Opinions" />
+            <Button fx:id="adressesButton" mnemonicParsing="false" prefWidth="100.0" text="Adresses" />
          </children>
       </VBox>
    </children>

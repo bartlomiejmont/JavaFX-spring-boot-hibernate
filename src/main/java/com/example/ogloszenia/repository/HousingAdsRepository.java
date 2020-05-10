@@ -1,9 +1,9 @@
 package com.example.ogloszenia.repository;
 
-import com.example.ogloszenia.model.RentalPosting;
+import com.example.ogloszenia.model.HousingAds;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RentalPostingRepository extends JpaRepository<RentalPosting, Long> {
+public interface HousingAdsRepository extends JpaRepository<HousingAds,Long> {
 }

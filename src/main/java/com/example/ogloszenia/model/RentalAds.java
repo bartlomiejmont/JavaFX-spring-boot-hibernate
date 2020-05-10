@@ -16,7 +16,7 @@ import javax.persistence.Id;
 @Data
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class ItemPosting {
+public class RentalAds {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NonNull
@@ -26,12 +26,12 @@ public class ItemPosting {
     private long userId;
 
     @NonNull
-    private String itemName;
+    private String postingTitle;
 
     @NonNull
     private String description;
 
     @NonNull
-    private long price;
+    private long costPerDay;
 
 }

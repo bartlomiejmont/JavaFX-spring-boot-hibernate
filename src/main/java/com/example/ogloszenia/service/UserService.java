@@ -50,8 +50,8 @@ public class UserService {
 
         TableView tableView = new TableView();
 
-//        TableColumn<Long, User> column1 = new TableColumn<>("Id");
-//        column1.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TableColumn<Long, User> column1 = new TableColumn<>("Id");
+        column1.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         TableColumn<String, User> column2 = new TableColumn<>("Login");
         column2.setCellValueFactory(new PropertyValueFactory<>("login"));
@@ -65,12 +65,15 @@ public class UserService {
         TableColumn<UserType, User> column5 = new TableColumn<>("Type");
         column5.setCellValueFactory(new PropertyValueFactory<>("type"));
 
+        TableColumn column6 = new TableColumn("Action");
 
-//        tableView.getColumns().add(column1);
+
+        tableView.getColumns().add(column1);
         tableView.getColumns().add(column2);
         tableView.getColumns().add(column3);
         tableView.getColumns().add(column4);
         tableView.getColumns().add(column5);
+        tableView.getColumns().add(column6);
 
         tableView.getItems().addAll(userRepository.findAll());
 
