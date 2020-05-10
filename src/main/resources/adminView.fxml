@@ -14,7 +14,7 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button fx:id="jobsButton" mnemonicParsing="false" prefWidth="100.0" text="Jobs">
+            <Button fx:id="jobsButton" mnemonicParsing="false" prefWidth="100.0" text="Jobs" onAction="#jobsClick">
                <VBox.margin>
                   <Insets />
                </VBox.margin>

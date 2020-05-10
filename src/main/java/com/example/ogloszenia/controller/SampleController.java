@@ -45,6 +45,7 @@ public class SampleController implements Initializable {
     @FXML
     public PasswordField passwordTextBox;
 
+
     public void loginClick(ActionEvent actionEvent) throws IOException {
 
         fxmlLoader = new FXMLLoader();
