@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -29,9 +30,11 @@ public class User {
     private long id;
 
     @NonNull
+    @Column (unique = true)
     private String login;
 
     @NonNull
+    @Column (unique = true)
     private String email;
 
     @NonNull
