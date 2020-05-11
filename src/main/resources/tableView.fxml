@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -16,23 +15,6 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="600.0">
                <children>
-                  <ScrollPane prefHeight="198.0" prefWidth="600.0">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="584.0">
-                           <children>
-                              <TableView fx:id="userTableView" prefHeight="200.0" prefWidth="584.0">
-                                <columns>
-                                    <TableColumn fx:id="userIdColumn" prefWidth="75.0" text="Id" />
-                                  <TableColumn fx:id="userLoginColumn" prefWidth="75.0" text="Login" />
-                                  <TableColumn fx:id="userEmailColumn" prefWidth="75.0" text="Email" />
-                                    <TableColumn fx:id="userPasswordColumn" prefWidth="75.0" text="Password" />
-                                    <TableColumn fx:id="userTypeColumn" prefWidth="75.0" text="Type" />
-                                </columns>
-                              </TableView>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </ScrollPane>
                   <Label layoutX="14.0" layoutY="331.0" prefHeight="30.0" prefWidth="60.0" text="Login" />
                   <Label layoutX="14.0" layoutY="240.0" prefHeight="30.0" prefWidth="60.0" text="Email" />
                   <Label layoutX="14.0" layoutY="270.0" prefHeight="30.0" prefWidth="60.0" text="Password" />
@@ -42,10 +24,23 @@
                   <TextField fx:id="userPasswordTF" layoutX="74.0" layoutY="273.0" />
                   <TextField fx:id="userTypeTF" layoutX="74.0" layoutY="303.0" />
                   <Label layoutX="14.0" layoutY="209.0" prefHeight="30.0" prefWidth="60.0" text="Id" />
-                  <TextField editable="false" layoutX="74.0" layoutY="212.0" />
-                  <Button fx:id="userAddBT" layoutX="274.0" layoutY="211.0" mnemonicParsing="false" prefWidth="70.0" text="Add" />
-                  <Button fx:id="userDeleteBT" layoutX="274.0" layoutY="243.0" mnemonicParsing="false" prefWidth="70.0" text="Delete" />
-                  <Button fx:id="userEditBT" layoutX="274.0" layoutY="273.0" mnemonicParsing="false" prefWidth="70.0" text="Edit" />
+                  <TextField fx:id="userIdTF" layoutX="74.0" layoutY="212.0" />
+                  <Button fx:id="userAddBT" layoutX="274.0" layoutY="211.0" mnemonicParsing="false" prefWidth="70.0" text="Add" onAction="#addClick" />
+                  <Button fx:id="userDeleteBT" layoutX="274.0" layoutY="243.0" mnemonicParsing="false" prefWidth="70.0" text="Delete" onAction="#deleteClick" />
+                  <Button fx:id="userEditBT" layoutX="274.0" layoutY="273.0" mnemonicParsing="false" prefWidth="70.0" text="Edit" onAction="#editClick" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="584.0">
+                     <children>
+                        <TableView fx:id="userTableView" prefHeight="200.0" prefWidth="584.0">
+                          <columns>
+                              <TableColumn fx:id="userIdColumn" prefWidth="75.0" text="Id" />
+                            <TableColumn fx:id="userLoginColumn" prefWidth="75.0" text="Login" />
+                            <TableColumn fx:id="userEmailColumn" prefWidth="75.0" text="Email" />
+                              <TableColumn fx:id="userPasswordColumn" prefWidth="75.0" text="Password" />
+                              <TableColumn fx:id="userTypeColumn" prefWidth="75.0" text="Type" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
                </children></AnchorPane>
       </content>
     </Tab>

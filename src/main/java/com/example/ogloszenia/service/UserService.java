@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.ogloszenia.OgloszeniaApplication.springContext;
 
@@ -42,6 +43,25 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public void addUser(User user){
+        userRepository.save(user);
+    }
+
+    public void editUser(User user ,Long id) {
+        userRepository.findById(id)
+                .map(__ -> userRepository.save(user));
+    }
+
+    public void deleteUser(Long id){
+         Optional.of(userRepository.existsById(id))
+                .filter(exist -> exist)
+                .map(__ -> {
+                    userRepository.deleteById(id);
+                    return null;
+                });
+
     }
 
     public void openTableViewModal(ActionEvent actionEvent) throws IOException {
@@ -63,61 +83,6 @@ public class UserService {
         newWindow.initOwner(primaryStage);
         newWindow.show();
 
-    }
-
-    public void openUsersWindow(ActionEvent actionEvent){
-        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        StackPane secondaryLayout = new StackPane();
-
-        Scene secondScene = new Scene(secondaryLayout, 230, 100);
-        // New window (Stage)
-        Stage newWindow = new Stage();
-        newWindow.setTitle("Second Stage");
-        newWindow.setScene(secondScene);
-
-        // Specifies the modality for new window.
-        newWindow.initModality(Modality.WINDOW_MODAL);
-        // Specifies the owner Window (parent) for new window
-        newWindow.initOwner(primaryStage);
-
-        // Set position of second window, related to primary window.
-        newWindow.setX(primaryStage.getX() + 200);
-        newWindow.setY(primaryStage.getY() + 100);
-
-        TableView tableView = new TableView();
-
-        TableColumn<Long, User> column1 = new TableColumn<>("Id");
-        column1.setCellValueFactory(new PropertyValueFactory<>("id"));
-
-        TableColumn<String, User> column2 = new TableColumn<>("Login");
-        column2.setCellValueFactory(new PropertyValueFactory<>("login"));
-
-        TableColumn<String, User> column3 = new TableColumn<>("Email");
-        column3.setCellValueFactory(new PropertyValueFactory<>("email"));
-
-        TableColumn<String, User> column4 = new TableColumn<>("Password");
-        column4.setCellValueFactory(new PropertyValueFactory<>("password"));
-
-        TableColumn<UserType, User> column5 = new TableColumn<>("Type");
-        column5.setCellValueFactory(new PropertyValueFactory<>("type"));
-
-
-        tableView.getColumns().add(column1);
-        tableView.getColumns().add(column2);
-        tableView.getColumns().add(column3);
-        tableView.getColumns().add(column4);
-        tableView.getColumns().add(column5);
-
-        tableView.getItems().addAll(userRepository.findAll());
-
-
-        VBox vbox = new VBox(tableView);
-
-        Scene scene = new Scene(vbox);
-
-        newWindow.setScene(scene);
-
-        newWindow.show();
     }
 
 }

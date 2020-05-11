@@ -35,7 +35,7 @@ public class AdminController implements Initializable {
 
     public void usersClick(ActionEvent actionEvent) {
 
-        userService.openUsersWindow(actionEvent);
+//        userService.openUsersWindow(actionEvent);
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.ogloszenia.model;
 
 import com.example.ogloszenia.type.UserType;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,12 +20,12 @@ import javax.persistence.Id;
 @Data
 @RequiredArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 //@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
     private long id;
 
     @NonNull
