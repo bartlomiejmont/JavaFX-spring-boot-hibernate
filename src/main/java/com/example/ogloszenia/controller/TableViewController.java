@@ -103,11 +103,13 @@ public class TableViewController implements Initializable {
     }
 
     public void deleteClick(ActionEvent actionEvent) {
-
+        userService.deleteUser(Long.valueOf(userIdTF.getText()));
+        tableViewRefresh();
     }
 
     public void editClick(ActionEvent actionEvent) {
-
+        userService.editUser(getUserFromTF(),Long.valueOf(userIdTF.getText()));
+        tableViewRefresh();
     }
 
     private User getUserFromTF(){

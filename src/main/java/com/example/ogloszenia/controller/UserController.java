@@ -28,7 +28,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @Controller
-public class AdminController implements Initializable {
+public class UserController implements Initializable {
 
     @Autowired
     private UserService userService;

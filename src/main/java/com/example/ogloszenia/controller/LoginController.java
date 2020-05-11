@@ -1,7 +1,5 @@
 package com.example.ogloszenia.controller;
 
-import com.example.ogloszenia.model.User;
-import com.example.ogloszenia.repository.UserRepository;
 import com.example.ogloszenia.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,13 +9,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
@@ -27,7 +23,7 @@ import java.util.ResourceBundle;
 import static com.example.ogloszenia.OgloszeniaApplication.springContext;
 
 @Controller
-public class SampleController implements Initializable {
+public class LoginController implements Initializable {
 
     @Autowired
     private UserService userService;
@@ -50,7 +46,7 @@ public class SampleController implements Initializable {
 
         fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(springContext::getBean);
-        fxmlLoader.setLocation(getClass().getResource("/adminView.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/userView.fxml"));
         Parent rootNode = fxmlLoader.load();
         Scene adminScene = new Scene(rootNode);
 

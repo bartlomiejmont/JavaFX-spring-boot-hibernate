@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
@@ -31,7 +30,7 @@ public class OgloszeniaApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception{
-		fxmlLoader.setLocation(getClass().getResource("/sample.fxml"));
+		fxmlLoader.setLocation(getClass().getResource("/loginView.fxml"));
 		Parent rootNode = fxmlLoader.load();
 
 		primaryStage.setTitle("Hello World");
