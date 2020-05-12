@@ -25,9 +25,9 @@
                   <TextField fx:id="userTypeTF" layoutX="74.0" layoutY="303.0" />
                   <Label layoutX="14.0" layoutY="209.0" prefHeight="30.0" prefWidth="60.0" text="Id" />
                   <TextField fx:id="userIdTF" layoutX="74.0" layoutY="212.0" />
-                  <Button fx:id="userAddBT" layoutX="274.0" layoutY="211.0" mnemonicParsing="false" prefWidth="70.0" text="Add" onAction="#addClick" />
-                  <Button fx:id="userDeleteBT" layoutX="274.0" layoutY="243.0" mnemonicParsing="false" prefWidth="70.0" text="Delete" onAction="#deleteClick" />
-                  <Button fx:id="userEditBT" layoutX="274.0" layoutY="273.0" mnemonicParsing="false" prefWidth="70.0" text="Edit" onAction="#editClick" />
+                  <Button fx:id="userAddBT" layoutX="274.0" layoutY="211.0" mnemonicParsing="false" onAction="#addUserClick" prefWidth="70.0" text="Add" />
+                  <Button fx:id="userDeleteBT" layoutX="274.0" layoutY="243.0" mnemonicParsing="false" onAction="#deleteUserClick" prefWidth="70.0" text="Delete" />
+                  <Button fx:id="userEditBT" layoutX="274.0" layoutY="273.0" mnemonicParsing="false" onAction="#editUserClick" prefWidth="70.0" text="Edit" />
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="584.0">
                      <children>
                         <TableView fx:id="userTableView" prefHeight="200.0" prefWidth="584.0">
@@ -44,9 +44,37 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab text="Untitled Tab 2">
+    <Tab text="Addresses">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="21.0" layoutY="211.0" prefHeight="30.0" prefWidth="81.0" text="Id" wrapText="true" />
+                  <Label layoutX="21.0" layoutY="267.0" prefHeight="30.0" prefWidth="83.0" text="City" wrapText="true" />
+                  <Label layoutX="21.0" layoutY="239.0" prefHeight="30.0" prefWidth="83.0" text="UserId" wrapText="true" />
+                  <Label layoutX="21.0" layoutY="330.0" prefHeight="30.0" prefWidth="83.0" text="FlatNumber" wrapText="true" />
+                  <TextField fx:id="adressFlatNumberTF" layoutX="104.0" layoutY="333.0" />
+                  <TextField fx:id="adessCityTF" layoutX="104.0" layoutY="270.0" />
+                  <TextField fx:id="adressIdTF" layoutX="104.0" layoutY="214.0" />
+                  <TextField fx:id="adressStreetTF" layoutX="104.0" layoutY="302.0" />
+                  <Label layoutX="21.0" layoutY="300.0" prefHeight="30.0" prefWidth="82.0" text="Street" wrapText="true" />
+                  <TextField fx:id="adressUserIdTF" layoutX="104.0" layoutY="242.0" />
+                  <Button fx:id="adressAddBT" layoutX="265.0" layoutY="214.0" mnemonicParsing="false" onAction="#addAdressClick" prefWidth="70.0" text="Add" />
+                  <Button fx:id="adressDeleteBT" layoutX="265.0" layoutY="255.0" mnemonicParsing="false" onAction="#deleteAdressClick" prefWidth="70.0" text="Delete" />
+                  <Button fx:id="adressEditBT" layoutX="265.0" layoutY="297.0" mnemonicParsing="false" onAction="#editAdressClick" prefWidth="70.0" text="Edit" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="584.0">
+                     <children>
+                        <TableView fx:id="adressTableView" prefHeight="200.0" prefWidth="584.0">
+                           <columns>
+                              <TableColumn fx:id="adressIdColumn" prefWidth="75.0" text="Id" />
+                              <TableColumn fx:id="adressUserIdColumn" prefWidth="75.0" text="UserId" />
+                              <TableColumn fx:id="adressCityColumn" prefWidth="75.0" text="City" />
+                              <TableColumn fx:id="adressStreetColumn" prefWidth="75.0" text="Street" />
+                              <TableColumn fx:id="adressFlatNumberColumn" prefWidth="75.0" text="Flat Number" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </children></AnchorPane>
       </content>
     </Tab>
   </tabs>

@@ -79,25 +79,4 @@ public class UserService {
         return user.map(u -> pass.equals(u.getPassword())).orElse(false);
     }
 
-    public void openTableViewModal(ActionEvent actionEvent) throws IOException {
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-
-        fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(springContext::getBean);
-        fxmlLoader.setLocation(getClass().getResource("/tableView.fxml"));
-        TabPane layout = fxmlLoader.load();
-
-        Stage newWindow = new Stage();
-
-        Scene secondScene = new Scene(layout);
-        newWindow.setScene(secondScene);
-
-        // Specifies the modality for new window.
-        newWindow.initModality(Modality.WINDOW_MODAL);
-        // Specifies the owner Window (parent) for new window
-        newWindow.initOwner(primaryStage);
-        newWindow.show();
-
-    }
-
 }

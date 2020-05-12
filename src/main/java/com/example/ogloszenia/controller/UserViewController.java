@@ -28,7 +28,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @Controller
-public class UserController implements Initializable {
+public class UserViewController implements Initializable {
 
     @Autowired
     private UserService userService;
@@ -45,6 +45,6 @@ public class UserController implements Initializable {
     }
 
     public void jobsClick(ActionEvent actionEvent) throws IOException {
-        userService.openTableViewModal(actionEvent);
+
     }
 }

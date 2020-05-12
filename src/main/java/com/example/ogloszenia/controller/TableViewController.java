@@ -97,17 +97,17 @@ public class TableViewController implements Initializable {
         this.userTypeTF.setText(String.valueOf(rowData.getType()));
     }
 
-    public void addClick(ActionEvent actionEvent) {
+    public void addUserClick(ActionEvent actionEvent) {
         userService.addUser(getUserFromTF());
         tableViewRefresh();
     }
 
-    public void deleteClick(ActionEvent actionEvent) {
+    public void deleteUserClick(ActionEvent actionEvent) {
         userService.deleteUser(Long.valueOf(userIdTF.getText()));
         tableViewRefresh();
     }
 
-    public void editClick(ActionEvent actionEvent) {
+    public void editUserClick(ActionEvent actionEvent) {
         userService.editUser(getUserFromTF(),Long.valueOf(userIdTF.getText()));
         tableViewRefresh();
     }
@@ -120,5 +120,14 @@ public class TableViewController implements Initializable {
     private void tableViewRefresh (){
         userTableView.getItems().removeAll(userTableView.getItems());
         userTableView.getItems().addAll(userService.getAllUsers());
+    }
+
+    public void addAdressClick(ActionEvent actionEvent) {
+    }
+
+    public void deleteAdressClick(ActionEvent actionEvent) {
+    }
+
+    public void editAdressClick(ActionEvent actionEvent) {
     }
 }

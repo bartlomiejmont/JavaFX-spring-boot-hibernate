@@ -1,6 +1,7 @@
 package com.example.ogloszenia.controller;
 
 import com.example.ogloszenia.service.UserService;
+import com.example.ogloszenia.type.UserType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,15 +46,19 @@ public class LoginController implements Initializable {
 
     public void loginClick(ActionEvent actionEvent) throws IOException {
 
-        if(validateLogin()){
-            fxmlLoader = new FXMLLoader();
-            fxmlLoader.setControllerFactory(springContext::getBean);
-            fxmlLoader.setLocation(getClass().getResource("/userView.fxml"));
-            Parent rootNode = fxmlLoader.load();
-            Scene adminScene = new Scene(rootNode);
-
-            Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-            window.setScene(adminScene);
+        if(validateLogin() != null){
+            if(validateLogin().equals(UserType.ADMIN)){
+                newWindow(actionEvent,"/adminView.fxml");
+                System.out.println("ADMIN");
+            }
+            if(validateLogin().equals(UserType.MOD)){
+                newWindow(actionEvent,"/userView.fxml");
+                System.out.println("MOD");
+            }
+            if(validateLogin().equals(UserType.USER)){
+                newWindow(actionEvent,"/userView.fxml");
+                System.out.println("USER");
+            }
         }
         else{
             Alert a = new Alert(Alert.AlertType.ERROR);
@@ -62,17 +67,28 @@ public class LoginController implements Initializable {
         }
     }
 
-    private boolean validateLogin(){
+    private UserType validateLogin(){
 
         String password = passwordTextBox.getText();
         String login = usernameTextBox.getText();
 
         if(userService.isPassMatchingToUser(login,password)){
-            return true;
+            return userService.getUserByLogin(login).get().getType();
         }
         else {
-            return false;
+            return null;
         }
+    }
+
+    private void newWindow(ActionEvent actionEvent,String viewPath) throws IOException {
+        fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(springContext::getBean);
+        fxmlLoader.setLocation(getClass().getResource(viewPath));
+        Parent rootNode = fxmlLoader.load();
+        Scene adminScene = new Scene(rootNode);
+
+        Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setScene(adminScene);
     }
 
     @Override
