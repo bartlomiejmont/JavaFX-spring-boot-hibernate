@@ -33,12 +33,6 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    private FXMLLoader fxmlLoader;
-
-    public void printAllUsers() {
-        System.out.println(userRepository.findAll());
-    }
-
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }

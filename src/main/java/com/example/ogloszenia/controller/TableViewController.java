@@ -1,6 +1,8 @@
 package com.example.ogloszenia.controller;
 
+import com.example.ogloszenia.model.Adress;
 import com.example.ogloszenia.model.User;
+import com.example.ogloszenia.service.AdressService;
 import com.example.ogloszenia.service.UserService;
 import com.example.ogloszenia.type.UserType;
 import javafx.event.ActionEvent;
@@ -23,6 +25,8 @@ public class TableViewController implements Initializable {
 
     @Autowired
     UserService userService;
+    @Autowired
+    AdressService adressService;
 
     @FXML
     private TableColumn<?, ?> userLoginColumn;
@@ -66,9 +70,85 @@ public class TableViewController implements Initializable {
     @FXML
     private TableView userTableView;
 
+    @FXML
+    private TextField adressFlatNumberTF;
+
+    @FXML
+    private TextField adressCityTF;
+
+    @FXML
+    private TextField adressIdTF;
+
+    @FXML
+    private TextField adressStreetTF;
+
+    @FXML
+    private TextField adressUserIdTF;
+
+    @FXML
+    private Button adressAddBT;
+
+    @FXML
+    private Button adressDeleteBT;
+
+    @FXML
+    private Button adressEditBT;
+
+    @FXML
+    private TableView adressTableView;
+
+    @FXML
+    private TableColumn<?, ?> adressIdColumn;
+
+    @FXML
+    private TableColumn<?, ?> adressUserIdColumn;
+
+    @FXML
+    private TableColumn<?, ?> adressCityColumn;
+
+    @FXML
+    private TableColumn<?, ?> adressStreetColumn;
+
+    @FXML
+    private TableColumn<?, ?> adressFlatNumberColumn;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        System.out.println(userService.getAllUsers());
+            userInitialize();
+            adressInitialize();
+    }
+
+    private void adressInitialize() {
+        adressIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        adressCityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
+        adressStreetColumn.setCellValueFactory(new PropertyValueFactory<>("street"));
+        adressUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        adressFlatNumberColumn.setCellValueFactory(new PropertyValueFactory<>("flatNumber"));
+        adressTableView.getItems().addAll(adressService.getAllAddresses());
+
+        adressTableView.setRowFactory( tv -> {
+            TableRow<Adress> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (! row.isEmpty()) {
+                    Adress rowData = row.getItem();
+                    replaceAdressTextFields(rowData);
+                }
+            });
+            return row ;
+        });
+    }
+
+    private void replaceAdressTextFields(Adress rowData) {
+        this.adressIdTF.setText(String.valueOf(rowData.getId()));
+        this.adressUserIdTF.setText(String.valueOf(rowData.getUserId()));
+        this.adressCityTF.setText(rowData.getCity());
+        this.adressStreetTF.setText(rowData.getStreet());
+        this.adressFlatNumberTF.setText(String.valueOf(rowData.getFlatNumber()));
+    }
+
+    private void userInitialize(){
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         userLoginColumn.setCellValueFactory(new PropertyValueFactory<>("login"));
         userEmailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -81,15 +161,14 @@ public class TableViewController implements Initializable {
             row.setOnMouseClicked(event -> {
                 if (! row.isEmpty()) {
                     User rowData = row.getItem();
-                    replaceTextFields(rowData);
-//                    System.out.println(rowData);
+                    replaceUserTextFields(rowData);
                 }
             });
             return row ;
         });
     }
 
-    private void replaceTextFields(User rowData) {
+    private void replaceUserTextFields(User rowData) {
         this.userEmailTF.setText(rowData.getEmail());
         this.userIdTF.setText(String.valueOf(rowData.getId()));
         this.userLoginTF.setText(rowData.getLogin());
@@ -120,6 +199,8 @@ public class TableViewController implements Initializable {
     private void tableViewRefresh (){
         userTableView.getItems().removeAll(userTableView.getItems());
         userTableView.getItems().addAll(userService.getAllUsers());
+        adressTableView.getItems().removeAll(adressTableView.getItems());
+        adressTableView.getItems().addAll(adressService.getAllAddresses());
     }
 
     public void addAdressClick(ActionEvent actionEvent) {

@@ -53,7 +53,7 @@
                   <Label layoutX="21.0" layoutY="239.0" prefHeight="30.0" prefWidth="83.0" text="UserId" wrapText="true" />
                   <Label layoutX="21.0" layoutY="330.0" prefHeight="30.0" prefWidth="83.0" text="FlatNumber" wrapText="true" />
                   <TextField fx:id="adressFlatNumberTF" layoutX="104.0" layoutY="333.0" />
-                  <TextField fx:id="adessCityTF" layoutX="104.0" layoutY="270.0" />
+                  <TextField fx:id="adressCityTF" layoutX="104.0" layoutY="270.0" />
                   <TextField fx:id="adressIdTF" layoutX="104.0" layoutY="214.0" />
                   <TextField fx:id="adressStreetTF" layoutX="104.0" layoutY="302.0" />
                   <Label layoutX="21.0" layoutY="300.0" prefHeight="30.0" prefWidth="82.0" text="Street" wrapText="true" />
