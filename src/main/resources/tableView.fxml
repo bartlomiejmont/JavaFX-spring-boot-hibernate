@@ -77,5 +77,41 @@
                </children></AnchorPane>
       </content>
     </Tab>
+      <Tab text="Jobpostings">
+          <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          </AnchorPane>
+          </content>
+      </Tab>
+      <Tab text="HousingAds">
+          <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          </AnchorPane>
+          </content>
+      </Tab>
+      <Tab text="ItemAds">
+          <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          </AnchorPane>
+          </content>
+      </Tab>
+      <Tab text="Messages">
+          <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          </AnchorPane>
+          </content>
+      </Tab>
+      <Tab text="RentalAds">
+          <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          </AnchorPane>
+          </content>
+      </Tab>
+      <Tab text="UserOpinions">
+          <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          </AnchorPane>
+          </content>
+      </Tab>
   </tabs>
 </TabPane>
