@@ -67,6 +67,10 @@ public class UserService {
         return Optional.ofNullable(user);
     }
 
+    public Optional<User> getUserById(Long id) {
+       return userRepository.findById(id);
+    }
+
     public boolean isPassMatchingToUser(String login, String pass){
         Optional<User> user = getUserByLogin(login);
 

@@ -1,16 +1,9 @@
-INSERT INTO user (login, email, password, type) VALUES
-('kaczor', 'karol@wp.pl', 'haslo1','USER'),
-('kaska', 'kasia@gmail.com', 'kasia123','USER'),
-('admin','admin@admin.pl','admin','ADMIN'),
-('user','user@user.pl','user','USER'),
-('mod','mod@mod.pl','mod','MOD');
-
-INSERT INTO adress (user_id, city, street, flat_number) VALUES
-(1,'Gdansk','Gronwaldzka 57','21'),
-(2,'Gdynia','Jana Pawla 25','12'),
-(3,'Warszawa','Grodzka 2','11'),
-(4,'Sopot','Wiejska 11','4'),
-(5,'Gdansk','Gronwaldzka 21','3');
+INSERT INTO adress (city, street, flat_number) VALUES
+('Gdansk','Gronwaldzka 57','21'),
+('Gdynia','Jana Pawla 25','12'),
+('Warszawa','Grodzka 2','11'),
+('Sopot','Wiejska 11','4'),
+('Gdansk','Gronwaldzka 21','3');
 
 INSERT INTO HOUSING_ADS (user_id, title, description, price, area, type) VALUES
 (1,'mieszkanie w sopocie','ciepłe przytulne mieszkanko w centrum sopotu', 1000,20,'RENT'),
@@ -37,3 +30,10 @@ INSERT INTO USER_OPINION (user_id, user_giving_opinion_id, description, rating) 
 INSERT INTO RENTAL_ADS (user_id, posting_title, description, cost_per_day) VALUES
 (1,'pożyczę wiertarkę','Mam wiertarkę 400W do wypożyczenia najlepiej na terenie trójmiasta',20),
 (3,'pożyczę serwerownie','Servery VPS po 3 latach zniżka 5%',10);
+
+INSERT INTO user (login, email, password, type, adress_id) VALUES
+('kaczor', 'karol@wp.pl', 'haslo1','USER',1),
+('kaska', 'kasia@gmail.com', 'kasia123','USER',3),
+('admin','admin@admin.pl','admin','ADMIN',2),
+('user','user@user.pl','user','USER',4),
+('mod','mod@mod.pl','mod','MOD',5);

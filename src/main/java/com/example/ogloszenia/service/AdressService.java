@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 
 @Service
 public class AdressService {
@@ -20,4 +22,21 @@ public class AdressService {
     }
 
 
+    public void addAdress(Adress adress) {
+        System.out.println("ADDING ADRESS");
+        adressRepository.save(adress);
+    }
+    public void deleteAdress(Long id) {
+        Optional.of(adressRepository.existsById(id))
+                .filter(exist -> exist)
+                .map(__ -> {
+                    adressRepository.deleteById(id);
+                    return null;
+                });
+    }
+    public void editAdress(Adress adress, Long id) {
+        adress.setId(id);
+        adressRepository.findById(id)
+                .map(__ -> adressRepository.save(adress));
+    }
 }

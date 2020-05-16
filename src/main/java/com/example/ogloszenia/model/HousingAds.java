@@ -26,10 +26,10 @@ public class HousingAds {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NonNull
-    private long id;
+    private Long id;
 
     @NonNull
-    private long userId;
+    private Long userId;
 
     @NonNull
     private String title;

@@ -124,7 +124,7 @@ public class TableViewController implements Initializable {
         adressIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         adressCityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
         adressStreetColumn.setCellValueFactory(new PropertyValueFactory<>("street"));
-        adressUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        adressUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("user"));
         adressFlatNumberColumn.setCellValueFactory(new PropertyValueFactory<>("flatNumber"));
         adressTableView.getItems().addAll(adressService.getAllAddresses());
 
@@ -142,7 +142,7 @@ public class TableViewController implements Initializable {
 
     private void replaceAdressTextFields(Adress rowData) {
         this.adressIdTF.setText(String.valueOf(rowData.getId()));
-        this.adressUserIdTF.setText(String.valueOf(rowData.getUserId()));
+        this.adressUserIdTF.setText(String.valueOf(rowData.getUser().getId()));
         this.adressCityTF.setText(rowData.getCity());
         this.adressStreetTF.setText(rowData.getStreet());
         this.adressFlatNumberTF.setText(String.valueOf(rowData.getFlatNumber()));
@@ -204,11 +204,23 @@ public class TableViewController implements Initializable {
     }
 
     public void addAdressClick(ActionEvent actionEvent) {
+        adressService.addAdress(getAdressFromTF());
+        tableViewRefresh();
     }
 
     public void deleteAdressClick(ActionEvent actionEvent) {
+        adressService.deleteAdress(Long.valueOf(adressIdTF.getText()));
+        tableViewRefresh();
     }
 
     public void editAdressClick(ActionEvent actionEvent) {
+        adressService.editAdress(getAdressFromTF(),Long.valueOf(adressIdTF.getText()));
+        tableViewRefresh();
+    }
+
+    private Adress getAdressFromTF(){
+        Adress adress = new Adress(Long.valueOf(adressIdTF.getText()),userService.getUserById(Long.valueOf(adressIdTF.getText())).get(),adressCityTF.getText(),adressStreetTF.getText(),adressFlatNumberTF.getText());
+        System.out.println(adress);
+        return adress;
     }
 }

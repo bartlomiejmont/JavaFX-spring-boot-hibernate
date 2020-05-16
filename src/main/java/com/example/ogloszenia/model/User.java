@@ -4,10 +4,14 @@ import com.example.ogloszenia.type.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,10 +19,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 @Builder
-@Data
+@Getter
+@Setter
+@ToString
 @RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,4 +52,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserType type;
 
+    @OneToOne
+    @JoinColumn(name = "adress_id")
+    private Adress adress;
+
+    @Override
+    public java.lang.String toString() {
+        return String.valueOf(id) ;
+    }
 }
