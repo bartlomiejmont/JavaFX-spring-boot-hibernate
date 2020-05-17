@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ogloszenia.controller.AdsController">
+<AnchorPane fx:id="app" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ogloszenia.controller.AdsController">
    <children>
-      <ScrollPane prefHeight="400.0" prefWidth="600.0">
+      <ScrollPane prefHeight="400.0" prefWidth="426.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -15,5 +18,18 @@
             </AnchorPane>
         </content>
       </ScrollPane>
+      <AnchorPane layoutX="427.0" prefHeight="400.0" prefWidth="172.0">
+         <children>
+            <VBox prefHeight="400.0" prefWidth="172.0">
+               <children>
+                  <Label text="Title" />
+                  <TextField fx:id="titleTF" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Description" />
+                  <TextField fx:id="descriptionTF" layoutX="10.0" layoutY="27.0" />
+                  <Button mnemonicParsing="false" text="Post" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

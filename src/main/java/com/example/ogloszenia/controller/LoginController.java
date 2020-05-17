@@ -1,6 +1,7 @@
 package com.example.ogloszenia.controller;
 
 import com.example.ogloszenia.service.UserService;
+import com.example.ogloszenia.service.UserViewService;
 import com.example.ogloszenia.type.UserType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,6 +30,9 @@ public class LoginController implements Initializable {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserViewService userViewService;
 
 
     private FXMLLoader fxmlLoader;
@@ -73,6 +77,7 @@ public class LoginController implements Initializable {
         String login = usernameTextBox.getText();
 
         if(userService.isPassMatchingToUser(login,password)){
+            userViewService.setLoggedUser(userService.getUserByLogin(login).get());
             return userService.getUserByLogin(login).get().getType();
         }
         else {
