@@ -185,18 +185,33 @@ public class TableViewController implements Initializable {
     }
 
     public void addUserClick(ActionEvent actionEvent) {
-        userService.addUser(getUserFromTF());
-        tableViewRefresh();
+        try {
+            userService.addUser(getUserFromTF());
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+
     }
 
     public void deleteUserClick(ActionEvent actionEvent) {
-        userService.deleteUser(Long.valueOf(userIdTF.getText()));
-        tableViewRefresh();
+        try {
+            userService.deleteUser(Long.valueOf(userIdTF.getText()));
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+
     }
 
     public void editUserClick(ActionEvent actionEvent) {
-        userService.editUser(getUserFromTF(),Long.valueOf(userIdTF.getText()));
-        tableViewRefresh();
+        try {
+            userService.editUser(getUserFromTF(),Long.valueOf(userIdTF.getText()));
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+
     }
 
     private User getUserFromTF(){
@@ -212,21 +227,34 @@ public class TableViewController implements Initializable {
     }
 
     public void addAdressClick(ActionEvent actionEvent) {
-        adressService.addAdress(getAdressFromTF());
-        changeUsersAdress(adressService.getAllAddresses().get(adressService.getAllAddresses().size()-1));
-        tableViewRefresh();
+        try {
+            adressService.addAdress(getAdressFromTF());
+            changeUsersAdress(adressService.getAllAddresses().get(adressService.getAllAddresses().size()-1));
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+
     }
 
     public void deleteAdressClick(ActionEvent actionEvent) {
-        adressService.deleteAdress(Long.valueOf(adressIdTF.getText()));
-        tableViewRefresh();
+        try {
+            adressService.deleteAdress(Long.valueOf(adressIdTF.getText()));
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+
     }
 
     public void editAdressClick(ActionEvent actionEvent) {
-
-        adressService.editAdress(getAdressFromTF(),Long.valueOf(adressIdTF.getText()));
-        changeUsersAdress(adressService.getAllAddresses().get((int) (Long.valueOf(adressIdTF.getText())-1)));
-        tableViewRefresh();
+        try {
+            adressService.editAdress(getAdressFromTF(),Long.valueOf(adressIdTF.getText()));
+            changeUsersAdress(adressService.getAllAddresses().get((int) (Long.valueOf(adressIdTF.getText())-1)));
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
     }
 
     private Adress getAdressFromTF(){

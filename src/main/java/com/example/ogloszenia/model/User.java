@@ -20,7 +20,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.List;
 
 @Entity
 @Builder
@@ -55,6 +59,24 @@ public class User {
     @OneToOne
     @JoinColumn(name = "adress_id")
     private Adress adress;
+
+    @OneToMany(mappedBy = "user")
+    private List<HousingAds> housingAds;
+
+    @OneToMany(mappedBy = "user")
+    private List<ItemAds> itemAds;
+
+    @OneToMany(mappedBy = "user")
+    private List<JobPosting> jobPostings;
+
+    @OneToMany(mappedBy = "user")
+    private List<RentalAds> rentalAds;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserOpinion> userOpinions;
+
+//    @ManyToMany(mappedBy = "user")
+//    private List<Message> messages;
 
     @Override
     public java.lang.String toString() {
