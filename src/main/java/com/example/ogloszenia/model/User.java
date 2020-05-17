@@ -75,9 +75,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<UserOpinion> userOpinions;
 
-//    @ManyToMany(mappedBy = "user")
-//    private List<Message> messages;
-
     @Override
     public java.lang.String toString() {
         return String.valueOf(id) ;

@@ -14,15 +14,15 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button fx:id="messagesButton" mnemonicParsing="false" prefWidth="100.0" text="Messages">
+            <Button fx:id="messagesButton" mnemonicParsing="false" prefWidth="100.0" text="Messages" onAction="#messagesClick">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button fx:id="itemsButton" mnemonicParsing="false" prefWidth="100.0" text="Items" />
-            <Button fx:id="rentalsButton" mnemonicParsing="false" prefWidth="100.0" text="Rentals" />
-            <Button fx:id="housesButton" mnemonicParsing="false" prefWidth="100.0" text="Houses" />
-            <Button fx:id="opinionsButton" mnemonicParsing="false" prefWidth="100.0" text="Opinions" />
+            <Button fx:id="itemsButton" mnemonicParsing="false" prefWidth="100.0" text="Items" onAction="#itemsClick" />
+            <Button fx:id="rentalsButton" mnemonicParsing="false" prefWidth="100.0" text="Rentals" onAction="#rentalsClick"/>
+            <Button fx:id="housesButton" mnemonicParsing="false" prefWidth="100.0" text="Houses" onAction="#housesClick"/>
+            <Button fx:id="opinionsButton" mnemonicParsing="false" prefWidth="100.0" text="Opinions" onAction="#opinionsClick" />
          </children>
       </VBox>
    </children>

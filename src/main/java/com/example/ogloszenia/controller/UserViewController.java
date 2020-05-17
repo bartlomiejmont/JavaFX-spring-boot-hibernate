@@ -3,6 +3,7 @@ package com.example.ogloszenia.controller;
 import com.example.ogloszenia.model.User;
 import com.example.ogloszenia.repository.UserRepository;
 import com.example.ogloszenia.service.UserService;
+import com.example.ogloszenia.service.UserViewService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,11 +34,8 @@ public class UserViewController implements Initializable {
     @Autowired
     private UserService userService;
 
-    public void usersClick(ActionEvent actionEvent) {
-
-//        userService.openUsersWindow(actionEvent);
-
-    }
+    @Autowired
+    private UserViewService userViewService;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -45,6 +43,24 @@ public class UserViewController implements Initializable {
     }
 
     public void jobsClick(ActionEvent actionEvent) throws IOException {
+        userViewService.openAdsViewModal(actionEvent, "/AdsView.fxml");
+    }
 
+    public void messagesClick(ActionEvent actionEvent) throws IOException {
+    }
+
+    public void itemsClick(ActionEvent actionEvent) throws IOException {
+        userViewService.openAdsViewModal(actionEvent, "/AdsView.fxml");
+    }
+
+    public void rentalsClick(ActionEvent actionEvent) throws IOException {
+        userViewService.openAdsViewModal(actionEvent, "/AdsView.fxml");
+    }
+
+    public void housesClick(ActionEvent actionEvent) throws IOException {
+        userViewService.openAdsViewModal(actionEvent, "/AdsView.fxml");
+    }
+
+    public void opinionsClick(ActionEvent actionEvent) {
     }
 }
