@@ -1,5 +1,6 @@
 package com.example.ogloszenia.controller;
 
+import com.example.ogloszenia.service.AdminViewService;
 import com.example.ogloszenia.service.UserService;
 import com.example.ogloszenia.service.UserViewService;
 import com.example.ogloszenia.type.UserType;
@@ -34,6 +35,9 @@ public class LoginController implements Initializable {
     @Autowired
     private UserViewService userViewService;
 
+    @Autowired
+    private AdminViewService adminViewService;
+
 
     private FXMLLoader fxmlLoader;
 
@@ -47,6 +51,9 @@ public class LoginController implements Initializable {
     @FXML
     public PasswordField passwordTextBox;
 
+    public void registerClick(ActionEvent actionEvent) throws IOException {
+        adminViewService.openPaneViewModal(actionEvent,"/registerView.fxml");
+    }
 
     public void loginClick(ActionEvent actionEvent) throws IOException {
 
@@ -56,7 +63,7 @@ public class LoginController implements Initializable {
                 System.out.println("ADMIN");
             }
             if(validateLogin().equals(UserType.MOD)){
-                newWindow(actionEvent,"/userView.fxml");
+                newWindow(actionEvent,"/modView.fxml");
                 System.out.println("MOD");
             }
             if(validateLogin().equals(UserType.USER)){
@@ -100,4 +107,5 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
 }
