@@ -6,10 +6,13 @@ import com.example.ogloszenia.model.JobPosting;
 import com.example.ogloszenia.model.RentalAds;
 import com.example.ogloszenia.service.AdsService;
 import com.example.ogloszenia.service.UserViewService;
+import com.example.ogloszenia.type.HousingType;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -30,6 +33,13 @@ public class AdsController implements Initializable {
     private VBox VBOX;
 
 
+    @FXML
+    private TextField titleTF;
+
+    @FXML
+    private TextField descriptionTF;
+
+
     @Autowired
     UserViewService userViewService;
 
@@ -48,6 +58,33 @@ public class AdsController implements Initializable {
             initializeHouses();
         }
         if(userViewService.getLastOpenAdTab().equals("RENTALS")){
+            initializeRentals();
+        }
+    }
+
+    public void postAnAd(ActionEvent actionEvent) {
+        if(userViewService.getLastOpenAdTab().equals("JOBS")){
+            JobPosting jobPosting = new JobPosting(userViewService.getLoggedUser(),titleTF.getText(),descriptionTF.getText(),2000,3000);
+            adsService.addJobPosting(jobPosting);
+            VBOX.getChildren().remove(0,VBOX.getChildren().size());
+            initializeJobs();
+        }
+        if(userViewService.getLastOpenAdTab().equals("ITEMS")){
+            ItemAds itemAds = new ItemAds(userViewService.getLoggedUser(),titleTF.getText(),descriptionTF.getText(),50);
+            adsService.addItemAd(itemAds);
+            VBOX.getChildren().remove(0,VBOX.getChildren().size());
+            initializeItems();
+        }
+        if(userViewService.getLastOpenAdTab().equals("HOUSES")){
+            HousingAds housingAds = new HousingAds(userViewService.getLoggedUser(),titleTF.getText(),descriptionTF.getText(), HousingType.RENT);
+            adsService.addHousingAd(housingAds);
+            VBOX.getChildren().remove(0,VBOX.getChildren().size());
+            initializeHouses();
+        }
+        if(userViewService.getLastOpenAdTab().equals("RENTALS")){
+            RentalAds rentalAds = new RentalAds(userViewService.getLoggedUser(),titleTF.getText(),descriptionTF.getText(),20);
+            adsService.addRentalAd(rentalAds);
+            VBOX.getChildren().remove(0,VBOX.getChildren().size());
             initializeRentals();
         }
     }

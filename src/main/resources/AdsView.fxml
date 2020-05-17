@@ -26,7 +26,7 @@
                   <TextField fx:id="titleTF" />
                   <Label layoutX="10.0" layoutY="10.0" text="Description" />
                   <TextField fx:id="descriptionTF" layoutX="10.0" layoutY="27.0" />
-                  <Button mnemonicParsing="false" text="Post" />
+                  <Button mnemonicParsing="false" text="Post" onAction="#postAnAd"/>
                </children>
             </VBox>
          </children>

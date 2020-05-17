@@ -14,14 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-@Builder
 @Data
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class ItemAds {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
     private long id;
 
     @NonNull

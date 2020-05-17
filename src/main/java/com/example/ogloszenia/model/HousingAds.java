@@ -28,9 +28,9 @@ import javax.validation.constraints.NotNull;
 public class HousingAds {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
     private Long id;
 
+    @NonNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

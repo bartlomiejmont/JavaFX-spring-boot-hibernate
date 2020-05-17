@@ -17,14 +17,12 @@ import javax.validation.constraints.Min;
 
 
 @Entity
-@Builder
 @Data
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class UserOpinion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
     private long id;
 
     @NonNull
