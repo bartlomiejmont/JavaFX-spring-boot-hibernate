@@ -29,7 +29,6 @@ import javax.validation.constraints.NotNull;
 public class Adress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
     private Long id;
 
     @OneToOne(mappedBy="adress")
@@ -41,6 +40,7 @@ public class Adress {
     @NonNull
     private String street;
 
+    @NonNull
     private String flatNumber;
 
 }

@@ -3,6 +3,7 @@ package com.example.ogloszenia.controller;
 import com.example.ogloszenia.model.Adress;
 import com.example.ogloszenia.model.User;
 import com.example.ogloszenia.service.AdressService;
+import com.example.ogloszenia.service.AlertGenerator;
 import com.example.ogloszenia.service.UserService;
 import com.example.ogloszenia.type.UserType;
 import javafx.event.ActionEvent;
@@ -25,6 +26,8 @@ public class TableViewController implements Initializable {
 
     @Autowired
     UserService userService;
+    @Autowired
+    AlertGenerator alertGenerator;
     @Autowired
     AdressService adressService;
 
@@ -142,10 +145,15 @@ public class TableViewController implements Initializable {
 
     private void replaceAdressTextFields(Adress rowData) {
         this.adressIdTF.setText(String.valueOf(rowData.getId()));
-        this.adressUserIdTF.setText(String.valueOf(rowData.getUser().getId()));
         this.adressCityTF.setText(rowData.getCity());
         this.adressStreetTF.setText(rowData.getStreet());
         this.adressFlatNumberTF.setText(String.valueOf(rowData.getFlatNumber()));
+        try {
+            this.adressUserIdTF.setText(String.valueOf(rowData.getUser().getId()));
+        }
+        catch (Exception e) {
+
+        }
     }
 
     private void userInitialize(){
@@ -205,6 +213,7 @@ public class TableViewController implements Initializable {
 
     public void addAdressClick(ActionEvent actionEvent) {
         adressService.addAdress(getAdressFromTF());
+        changeUsersAdress(adressService.getAllAddresses().get(adressService.getAllAddresses().size()-1));
         tableViewRefresh();
     }
 
@@ -214,13 +223,27 @@ public class TableViewController implements Initializable {
     }
 
     public void editAdressClick(ActionEvent actionEvent) {
+
         adressService.editAdress(getAdressFromTF(),Long.valueOf(adressIdTF.getText()));
+        changeUsersAdress(adressService.getAllAddresses().get((int) (Long.valueOf(adressIdTF.getText())-1)));
         tableViewRefresh();
     }
 
     private Adress getAdressFromTF(){
-        Adress adress = new Adress(Long.valueOf(adressIdTF.getText()),userService.getUserById(Long.valueOf(adressIdTF.getText())).get(),adressCityTF.getText(),adressStreetTF.getText(),adressFlatNumberTF.getText());
-        System.out.println(adress);
+        Adress adress = new Adress(adressCityTF.getText(),adressStreetTF.getText(),adressFlatNumberTF.getText());
         return adress;
+    }
+
+    private void changeUsersAdress(Adress adress) {
+        if(!adressUserIdTF.getText().equals("")){
+            try {
+                User user = userService.getUserById(Long.valueOf(adressUserIdTF.getText())).get();
+                user.setAdress(adress);
+                userService.editUser(user,Long.valueOf(adressUserIdTF.getText()));
+            }
+            catch (Exception e) {
+                alertGenerator.generateAlert(e);
+            }
+        }
     }
 }
