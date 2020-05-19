@@ -10,4 +10,9 @@ public class AlertGenerator {
         a.setContentText(e.getMessage());
         a.show();
     }
+    public void okAlert(String s){
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setContentText(s);
+        a.show();
+    }
 }

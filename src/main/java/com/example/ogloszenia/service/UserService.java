@@ -4,24 +4,14 @@ import com.example.ogloszenia.model.QUser;
 import com.example.ogloszenia.model.User;
 import com.example.ogloszenia.repository.UserRepository;
 import com.querydsl.jpa.impl.JPAQuery;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.TabPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-
-import static com.example.ogloszenia.OgloszeniaApplication.springContext;
 
 @Service
 @RequiredArgsConstructor

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
+<?import javafx.scene.control.PasswordField?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ogloszenia.controller.RegisterController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0">
@@ -27,16 +27,16 @@
             <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <Label prefWidth="80.0" text="Password:" />
-                  <TextField fx:id="password1TF" />
+                  <PasswordField fx:id="password1TF" accessibleRole="PASSWORD_FIELD" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <Label prefWidth="80.0" text="Password:" />
-                  <TextField fx:id="password2TF" />
+                  <PasswordField fx:id="password2TF" accessibleRole="PASSWORD_FIELD" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" text="Register" onAction="#register"/>
+            <Button mnemonicParsing="false" onAction="#register" text="Register" />
          </children>
       </VBox>
    </children>

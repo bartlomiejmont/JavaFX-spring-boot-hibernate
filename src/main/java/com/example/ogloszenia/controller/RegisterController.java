@@ -7,6 +7,7 @@ import com.example.ogloszenia.type.UserType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,10 @@ public class RegisterController {
     private TextField emailTF;
 
     @FXML
-    private TextField password1TF;
+    private PasswordField password1TF;
 
     @FXML
-    private TextField password2TF;
+    private PasswordField password2TF;
 
     @Autowired
     private UserService userService;

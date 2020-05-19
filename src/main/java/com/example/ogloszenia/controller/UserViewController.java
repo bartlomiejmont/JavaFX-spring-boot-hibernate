@@ -30,6 +30,7 @@ public class UserViewController implements Initializable {
     }
 
     public void messagesClick(ActionEvent actionEvent) throws IOException {
+        userViewService.openMessagesViewModal(actionEvent, "/MessagesView.fxml" ,"MESSAGES");
     }
 
     public void itemsClick(ActionEvent actionEvent) throws IOException {
