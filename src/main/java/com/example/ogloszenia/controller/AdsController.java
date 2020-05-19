@@ -5,6 +5,7 @@ import com.example.ogloszenia.model.ItemAds;
 import com.example.ogloszenia.model.JobPosting;
 import com.example.ogloszenia.model.RentalAds;
 import com.example.ogloszenia.service.AdsService;
+import com.example.ogloszenia.service.AlertGenerator;
 import com.example.ogloszenia.service.UserViewService;
 import com.example.ogloszenia.type.HousingType;
 import javafx.event.ActionEvent;
@@ -46,6 +47,9 @@ public class AdsController implements Initializable {
     @Autowired
     AdsService adsService;
 
+    @Autowired
+    AlertGenerator alertGenerator;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(userViewService.getLastOpenAdTab().equals("JOBS")){
@@ -64,28 +68,44 @@ public class AdsController implements Initializable {
 
     public void postAnAd(ActionEvent actionEvent) {
         if(userViewService.getLastOpenAdTab().equals("JOBS")){
-            JobPosting jobPosting = new JobPosting(userViewService.getLoggedUser(),titleTF.getText(),descriptionTF.getText(),2000,3000);
-            adsService.addJobPosting(jobPosting);
-            VBOX.getChildren().remove(0,VBOX.getChildren().size());
-            initializeJobs();
+            try {
+                JobPosting jobPosting = new JobPosting(userViewService.getLoggedUser(),titleTF.getText(),descriptionTF.getText(),2000,3000);
+                adsService.addJobPosting(jobPosting);
+                VBOX.getChildren().remove(0,VBOX.getChildren().size());
+                initializeJobs();
+            } catch (Exception e){
+                alertGenerator.generateAlert(e);
+            }
         }
         if(userViewService.getLastOpenAdTab().equals("ITEMS")){
-            ItemAds itemAds = new ItemAds(userViewService.getLoggedUser(),titleTF.getText(),descriptionTF.getText(),50);
-            adsService.addItemAd(itemAds);
-            VBOX.getChildren().remove(0,VBOX.getChildren().size());
-            initializeItems();
+            try {
+                ItemAds itemAds = new ItemAds(userViewService.getLoggedUser(),titleTF.getText(),descriptionTF.getText(),50);
+                adsService.addItemAd(itemAds);
+                VBOX.getChildren().remove(0,VBOX.getChildren().size());
+                initializeItems();
+            } catch (Exception e){
+                alertGenerator.generateAlert(e);
+            }
         }
         if(userViewService.getLastOpenAdTab().equals("HOUSES")){
-            HousingAds housingAds = new HousingAds(userViewService.getLoggedUser(),titleTF.getText(),descriptionTF.getText(), HousingType.RENT);
-            adsService.addHousingAd(housingAds);
-            VBOX.getChildren().remove(0,VBOX.getChildren().size());
-            initializeHouses();
+            try {
+                HousingAds housingAds = new HousingAds(userViewService.getLoggedUser(),titleTF.getText(),descriptionTF.getText(), HousingType.RENT);
+                adsService.addHousingAd(housingAds);
+                VBOX.getChildren().remove(0,VBOX.getChildren().size());
+                initializeHouses();
+            } catch (Exception e){
+                alertGenerator.generateAlert(e);
+            }
         }
         if(userViewService.getLastOpenAdTab().equals("RENTALS")){
-            RentalAds rentalAds = new RentalAds(userViewService.getLoggedUser(),titleTF.getText(),descriptionTF.getText(),20);
-            adsService.addRentalAd(rentalAds);
-            VBOX.getChildren().remove(0,VBOX.getChildren().size());
-            initializeRentals();
+            try {
+                RentalAds rentalAds = new RentalAds(userViewService.getLoggedUser(),titleTF.getText(),descriptionTF.getText(),20);
+                adsService.addRentalAd(rentalAds);
+                VBOX.getChildren().remove(0,VBOX.getChildren().size());
+                initializeRentals();
+            } catch (Exception e){
+                alertGenerator.generateAlert(e);
+            }
         }
     }
 

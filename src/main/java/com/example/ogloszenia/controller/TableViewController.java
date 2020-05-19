@@ -1,9 +1,11 @@
 package com.example.ogloszenia.controller;
 
 import com.example.ogloszenia.model.Adress;
+import com.example.ogloszenia.model.JobPosting;
 import com.example.ogloszenia.model.User;
 import com.example.ogloszenia.service.AdressService;
 import com.example.ogloszenia.service.AlertGenerator;
+import com.example.ogloszenia.service.JobPostingService;
 import com.example.ogloszenia.service.UserService;
 import com.example.ogloszenia.type.UserType;
 import javafx.event.ActionEvent;
@@ -30,6 +32,8 @@ public class TableViewController implements Initializable {
     AlertGenerator alertGenerator;
     @Autowired
     AdressService adressService;
+    @Autowired
+    JobPostingService jobPostingService;
 
     @FXML
     private TableColumn<?, ?> userLoginColumn;
@@ -115,12 +119,49 @@ public class TableViewController implements Initializable {
     @FXML
     private TableColumn<?, ?> adressFlatNumberColumn;
 
+    @FXML
+    private TextField maxSalaryTF;
+
+    @FXML
+    private TextField jobDescriptionTF;
+
+    @FXML
+    private TextField jobTitleTF;
+
+    @FXML
+    private TextField minSalaryTF;
+
+    @FXML
+    private TextField jobUserLoginTF;
+
+    @FXML
+    private TableView jobTableView;
+
+    @FXML
+    private TableColumn<?, ?> jobIdColumn;
+
+    @FXML
+    private TableColumn<?, ?> jobUserIdColumn;
+
+    @FXML
+    private TableColumn<?, ?> jobTitleColumn;
+
+    @FXML
+    private TableColumn<?, ?> jobDescriptionColumn;
+
+    @FXML
+    private TableColumn<?, ?> jobMinSalaryColumn;
+
+    @FXML
+    private TableColumn<?, ?> jobMaxSalaryColumn;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        System.out.println(userService.getAllUsers());
             userInitialize();
             adressInitialize();
+            jobPostingInitialize();
     }
 
     private void adressInitialize() {
@@ -155,6 +196,26 @@ public class TableViewController implements Initializable {
 
         }
     }
+    private void jobPostingInitialize(){
+        jobIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        jobUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("user"));
+        jobTitleColumn.setCellValueFactory(new PropertyValueFactory<>("jobTitle"));
+        jobDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        jobMinSalaryColumn.setCellValueFactory(new PropertyValueFactory<>("minSalary"));
+        jobMaxSalaryColumn.setCellValueFactory(new PropertyValueFactory<>("maxSalary"));
+        jobTableView.getItems().addAll(jobPostingService.getAllJobPostings());
+
+        jobTableView.setRowFactory( tv -> {
+            TableRow<JobPosting> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (! row.isEmpty()) {
+                    JobPosting rowData = row.getItem();
+                    replaceJobPostingTextField(rowData);
+                }
+            });
+            return row ;
+        });
+    }
 
     private void userInitialize(){
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -174,6 +235,13 @@ public class TableViewController implements Initializable {
             });
             return row ;
         });
+    }
+    private void replaceJobPostingTextField(JobPosting jobPosting) {
+        this.jobTitleTF.setText(jobPosting.getJobTitle());
+        this.jobDescriptionTF.setText(jobPosting.getDescription());
+        this.minSalaryTF.setText(String.valueOf(jobPosting.getMinSalary()));
+        this.maxSalaryTF.setText(String.valueOf(jobPosting.getMaxSalary()));
+        this.jobUserLoginTF.setText(jobPosting.getUser().getLogin());
     }
 
     private void replaceUserTextFields(User rowData) {
@@ -224,6 +292,8 @@ public class TableViewController implements Initializable {
         userTableView.getItems().addAll(userService.getAllUsers());
         adressTableView.getItems().removeAll(adressTableView.getItems());
         adressTableView.getItems().addAll(adressService.getAllAddresses());
+        jobTableView.getItems().removeAll(jobTableView.getItems());
+        jobTableView.getItems().addAll(jobPostingService.getAllJobPostings());
     }
 
     public void addAdressClick(ActionEvent actionEvent) {
@@ -255,6 +325,52 @@ public class TableViewController implements Initializable {
         } catch (Exception e ){
             alertGenerator.generateAlert(e);
         }
+    }
+
+    @FXML
+    void addJobClick(ActionEvent event) {
+        try {
+            jobPostingService.addJobPosting(getJobPostingFromTF());
+            changeUsersAdress(adressService.getAllAddresses().get(adressService.getAllAddresses().size()-1));
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+    }
+
+    @FXML
+    void editJobClick(ActionEvent event) {
+        try {
+            jobPostingService.editJobPosting(getJobPostingFromTF(),jobPostingService.getJobPostingByTitle(jobTitleTF.getText()).get().getId());
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+    }
+
+    @FXML
+    void deleteJobClick(ActionEvent event) {
+        try {
+            jobPostingService.deleteJobPosting(jobPostingService.getJobPostingByTitle(jobTitleTF.getText()).get().getId());
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+    }
+
+    private JobPosting getJobPostingFromTF(){
+        try{
+            User user = userService.getUserByLogin(jobUserLoginTF.getText()).get();
+            try{
+                JobPosting jobPosting = new JobPosting(user,jobTitleTF.getText(),jobDescriptionTF.getText(),Long.parseLong(minSalaryTF.getText()),Long.parseLong(maxSalaryTF.getText()));
+                return jobPosting;
+            } catch (Exception e){
+                alertGenerator.generateAlert(e);
+            }
+        } catch (Exception e){
+            alertGenerator.generateAlert(new Exception("User does not exists"));
+        }
+        return null;
     }
 
     private Adress getAdressFromTF(){
