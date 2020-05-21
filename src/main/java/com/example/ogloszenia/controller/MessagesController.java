@@ -52,9 +52,9 @@ public class MessagesController implements Initializable {
     @FXML
     void sendMessage(ActionEvent event) {
         try{
-            long userSendingId = userViewService.getLoggedUser().getId();
-            long userRecevingId = userService.getUserByLogin(userChoice.getValue()).get().getId();
-            Message message = new Message(userSendingId,userRecevingId,titleTF.getText(),contentTA.getText());
+            User userSending = userViewService.getLoggedUser();
+            User userReceving = userService.getUserByLogin(userChoice.getValue()).get();
+            Message message = new Message(userSending,userReceving,titleTF.getText(),contentTA.getText());
             messageService.addMessage(message);
             alertGenerator.okAlert("Message has been sent");
         } catch (Exception e){

@@ -29,7 +29,6 @@ public class JobPosting {
     private User user;
 
     @NonNull
-    @Column(unique = true)
     private String jobTitle;
 
     @NonNull

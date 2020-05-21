@@ -10,6 +10,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.jboss.logging.Messages;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -74,6 +75,12 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<UserOpinion> userOpinions;
+
+    @OneToMany(mappedBy = "userSendingId")
+    private List<Message> messagesSent;
+
+    @OneToMany(mappedBy = "userReceivingId")
+    private List<Message> messagesReceived;
 
     @Override
     public java.lang.String toString() {

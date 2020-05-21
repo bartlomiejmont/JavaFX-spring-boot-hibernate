@@ -30,6 +30,8 @@ public class MessageService {
     @Autowired
     private UserViewService userViewService;
 
+    public List<Message> getAllMessages(){return messageRepository.findAll();}
+
     public Optional<List<Message>> getAllUsersMessages(){
         User user = userViewService.getLoggedUser();
 
@@ -38,7 +40,7 @@ public class MessageService {
 
         List<Message> messages = new ArrayList<>(query.select(qMessage)
                 .from(qMessage)
-                .where(qMessage.userReceivingId.eq(user.getId()))
+                .where(qMessage.userReceivingId.eq(user))
                 .fetch());
         return Optional.ofNullable(messages);
     }
@@ -46,5 +48,26 @@ public class MessageService {
     public void addMessage(Message message) {
         messageRepository.save(message);
     }
+
+    public void editMessage(Message message, Long id) {
+        message.setId(id);
+        messageRepository.findById(id)
+                .map(__ -> messageRepository.save(message));
+    }
+
+    public void deleteMessage(Long id) {
+        Optional.of(messageRepository.existsById(id))
+                .filter(exist -> exist)
+                .map(__ -> {
+                    messageRepository.deleteById(id);
+                    return null;
+                });
+
+    }
+
+    public Optional<Message> getMessageById(Long id) {
+        return messageRepository.findById(id);
+    }
+
 
 }

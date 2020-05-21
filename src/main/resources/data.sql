@@ -26,7 +26,7 @@ INSERT INTO JOB_POSTING (user_id, job_title, description, min_salary, max_salary
 (2,'Junior Java Developer','Programista Java/JavaScript', 3000, 5000),
 (2,'Senior HTML Developer','Wymagane 20 letnie doświadczenie programowania w języku HTML', 5000, 6000);
 
-INSERT INTO message (user_sending_id, user_receiving_id, title, content) values
+INSERT INTO message (user_s_id, user_r_id, title, content) values
 (2,1,'kupie wazon','Panie karolu kupie wazon, mam horom curke'),
 (2,1,'kupie wazon','Halllo ?, Panie Karolu!!! Ile pan spóści ?');
 
