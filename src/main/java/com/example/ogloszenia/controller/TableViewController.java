@@ -1,19 +1,25 @@
 package com.example.ogloszenia.controller;
 
 import com.example.ogloszenia.model.Adress;
+import com.example.ogloszenia.model.HousingAds;
+import com.example.ogloszenia.model.ItemAds;
 import com.example.ogloszenia.model.JobPosting;
 import com.example.ogloszenia.model.Message;
+import com.example.ogloszenia.model.RentalAds;
 import com.example.ogloszenia.model.User;
 import com.example.ogloszenia.service.AdressService;
+import com.example.ogloszenia.service.AdsService;
 import com.example.ogloszenia.service.AlertGenerator;
 import com.example.ogloszenia.service.JobPostingService;
 import com.example.ogloszenia.service.MessageService;
 import com.example.ogloszenia.service.UserService;
+import com.example.ogloszenia.type.HousingType;
 import com.example.ogloszenia.type.UserType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -24,6 +30,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static com.example.ogloszenia.model.QJobPosting.jobPosting;
@@ -41,6 +49,8 @@ public class TableViewController implements Initializable {
     private JobPostingService jobPostingService;
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private AdsService adsService;
 
     @FXML
     private TableColumn<?, ?> userLoginColumn;
@@ -175,6 +185,109 @@ public class TableViewController implements Initializable {
     @FXML
     private TableColumn<?, ?> messageContentCol;
 
+    @FXML
+    private TextField housingAreaTF;
+
+    @FXML
+    private TextField housingDescTF;
+
+    @FXML
+    private TextField housingTitleTF;
+
+    @FXML
+    private TextField housingPriceTF;
+
+    @FXML
+    private TextField housingUserTF;
+
+    @FXML
+    private TableView housingTableView;
+
+    @FXML
+    private TableColumn<?, ?> housingIdCol;
+
+    @FXML
+    private TableColumn<?, ?> housingUserIdCol;
+
+    @FXML
+    private TableColumn<?, ?> housingTitleCol;
+
+    @FXML
+    private TableColumn<?, ?> housingDescCol;
+
+    @FXML
+    private TableColumn<?, ?> housingPriceCol;
+
+    @FXML
+    private TableColumn<?, ?> housingAreaCol;
+
+    @FXML
+    private TableColumn<?, ?> housingTypeCol;
+
+    @FXML
+    private ChoiceBox<HousingType> housingTypeChoice;
+
+    @FXML
+    private TextField itemDescTF;
+
+    @FXML
+    private TextField itemTitleTF;
+
+    @FXML
+    private TextField itemPriceTF;
+
+    @FXML
+    private TextField itemUserTF;
+
+    @FXML
+    private TableView itemTableView;
+
+    @FXML
+    private TableColumn<?, ?> itemIdCol;
+
+    @FXML
+    private TableColumn<?, ?> itemuserIdCol;
+
+    @FXML
+    private TableColumn<?, ?> itemTitleCol;
+
+    @FXML
+    private TableColumn<?, ?> itemDescriptionCol;
+
+    @FXML
+    private TableColumn<?, ?> itemPriceCol;
+
+    @FXML
+    private TextField rentalDescTF;
+
+    @FXML
+    private TextField rentalTitleTF;
+
+    @FXML
+    private TextField rentalCostTF;
+
+    @FXML
+    private TextField rentaluserTF;
+
+    @FXML
+    private TableView rentalTableView;
+
+    @FXML
+    private TableColumn<?, ?> rentalIdCol;
+
+    @FXML
+    private TableColumn<?, ?> rentalUserIdCol;
+
+    @FXML
+    private TableColumn<?, ?> rentalTitleCol;
+
+    @FXML
+    private TableColumn<?, ?> rentalDescCol;
+
+    @FXML
+    private TableColumn<?, ?> rentalCostCol;
+
+
     /*   ALL-PURPOSE  */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -182,6 +295,9 @@ public class TableViewController implements Initializable {
         adressInitialize();
         jobPostingInitialize();
         messagesInitialize();
+        housingAdsInitialize();
+        itemAdsInitialize();
+        rentalAdsInitialize();
     }
 
     private void tableViewRefresh (){
@@ -193,6 +309,263 @@ public class TableViewController implements Initializable {
         jobTableView.getItems().addAll(jobPostingService.getAllJobPostings());
         messageTableView.getItems().removeAll(messageTableView.getItems());
         messageTableView.getItems().addAll(messageService.getAllMessages());
+        housingTableView.getItems().removeAll(housingTableView.getItems());
+        housingTableView.getItems().removeAll(adsService.getAllHousingAds());
+        itemTableView.getItems().removeAll(itemTableView.getItems());
+        itemTableView.getItems().removeAll(adsService.getAllItemAds());
+        rentalTableView.getItems().removeAll(rentalTableView.getItems());
+        rentalTableView.getItems().removeAll(adsService.getAllRentalsAds());
+    }
+
+    /*   RentalAd   */
+    private RentalAds selectedRentalAds;
+    private void rentalAdsInitialize(){
+        rentalIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        rentalUserIdCol.setCellValueFactory(new PropertyValueFactory<>("user"));
+        rentalTitleCol.setCellValueFactory(new PropertyValueFactory<>("postingTitle"));
+        rentalDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        rentalCostCol.setCellValueFactory(new PropertyValueFactory<>("costPerDay"));
+        rentalTableView.getItems().addAll(adsService.getAllRentalsAds());
+
+        rentalTableView.setRowFactory( tv -> {
+            TableRow<RentalAds> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (! row.isEmpty()) {
+                    RentalAds rowData = row.getItem();
+                    selectedRentalAds = rowData;
+                    replaceRentalAdTextField(rowData);
+                }
+            });
+            return row ;
+        });
+    }
+
+    private void replaceRentalAdTextField(RentalAds rentalAds) {
+        this.rentalTitleTF.setText(rentalAds.getPostingTitle());
+        this.rentalDescTF.setText(rentalAds.getDescription());
+        this.rentalCostTF.setText(String.valueOf(rentalAds.getCostPerDay()));
+        this.rentaluserTF.setText(rentalAds.getUser().getLogin());
+    }
+
+    @FXML
+    void addRentalClick(ActionEvent event) {
+        try {
+            adsService.addRentalAd(getRentalAdFromTF());
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+    }
+
+    @FXML
+    void editRentalClick(ActionEvent event) {
+        try {
+            adsService.editRentalAd(getRentalAdFromTF(),selectedRentalAds.getId());
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+    }
+
+    @FXML
+    void deleteRentalClick(ActionEvent event) {
+        try {
+            adsService.deleteRentalAd(selectedRentalAds.getId());
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+    }
+
+    private RentalAds getRentalAdFromTF(){
+        try{
+            User user = userService.getUserByLogin(housingUserTF.getText()).get();
+            try{
+                RentalAds rentalAds = RentalAds.builder()
+                        .user(user)
+                        .postingTitle(rentalTitleTF.getText())
+                        .description(rentalDescTF.getText())
+                        .costPerDay(Long.parseLong(rentalCostTF.getText()))
+                        .build();
+                return rentalAds;
+            } catch (Exception e){
+                alertGenerator.generateAlert(e);
+            }
+        } catch (Exception e){
+            alertGenerator.generateAlert(new Exception("User does not exists"));
+        }
+        return null;
+    }
+
+
+    /*   ItemAd   */
+    private ItemAds selectedItemAds;
+    private void itemAdsInitialize(){
+        itemIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        itemuserIdCol.setCellValueFactory(new PropertyValueFactory<>("user"));
+        itemTitleCol.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        itemDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        itemPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        itemTableView.getItems().addAll(adsService.getAllItemAds());
+
+        itemTableView.setRowFactory( tv -> {
+            TableRow<ItemAds> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (! row.isEmpty()) {
+                    ItemAds rowData = row.getItem();
+                    selectedItemAds = rowData;
+                    replaceItemAdTextField(rowData);
+                }
+            });
+            return row ;
+        });
+    }
+
+    private void replaceItemAdTextField(ItemAds itemAds) {
+        this.itemTitleTF.setText(itemAds.getItemName());
+        this.itemDescTF.setText(itemAds.getDescription());
+        this.itemPriceTF.setText(String.valueOf(itemAds.getPrice()));
+        this.itemUserTF.setText(itemAds.getUser().getLogin());
+    }
+
+    @FXML
+    void addItemClick(ActionEvent event) {
+        try {
+            adsService.addItemAd(getItemAdFromTF());
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+    }
+
+    @FXML
+    void editItemClick(ActionEvent event) {
+        try {
+            adsService.editItemAd(getItemAdFromTF(),selectedItemAds.getId());
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+    }
+
+    @FXML
+    void deleteItemClick(ActionEvent event) {
+        try {
+            adsService.deleteItemAd(selectedItemAds.getId());
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+    }
+
+    private ItemAds getItemAdFromTF(){
+        try{
+            User user = userService.getUserByLogin(housingUserTF.getText()).get();
+            try{
+                ItemAds itemAds = ItemAds.builder()
+                        .user(user)
+                        .itemName(itemTitleTF.getText())
+                        .description(itemDescTF.getText())
+                        .price(Long.parseLong(itemPriceTF.getText()))
+                        .build();
+                return itemAds;
+            } catch (Exception e){
+                alertGenerator.generateAlert(e);
+            }
+        } catch (Exception e){
+            alertGenerator.generateAlert(new Exception("User does not exists"));
+        }
+        return null;
+    }
+
+
+    /*   HousingAd   */
+    private HousingAds selectedHousingAds;
+    private void housingAdsInitialize(){
+
+        this.housingTypeChoice.getItems().addAll(HousingType.RENT,HousingType.BUY);
+
+        housingIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        housingUserIdCol.setCellValueFactory(new PropertyValueFactory<>("user"));
+        housingTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        housingDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        housingAreaCol.setCellValueFactory(new PropertyValueFactory<>("area"));
+        housingPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        housingTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        housingTableView.getItems().addAll(adsService.getAllHousingAds());
+
+        housingTableView.setRowFactory( tv -> {
+            TableRow<HousingAds> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (! row.isEmpty()) {
+                    HousingAds rowData = row.getItem();
+                    selectedHousingAds = rowData;
+                    replaceHousingAdTextField(rowData);
+                }
+            });
+            return row ;
+        });
+    }
+
+    private void replaceHousingAdTextField(HousingAds housingAds) {
+        this.housingTitleTF.setText(housingAds.getTitle());
+        this.housingDescTF.setText(housingAds.getDescription());
+        this.housingAreaTF.setText(String.valueOf(housingAds.getArea()));
+        this.housingPriceTF.setText(String.valueOf(housingAds.getPrice()));
+        this.housingUserTF.setText(housingAds.getUser().getLogin());
+        this.housingTypeChoice.setValue(housingAds.getType());
+    }
+
+    @FXML
+    void addHousingClick(ActionEvent event) {
+        try {
+            adsService.addHousingAd(getHousingAdFromTF());
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+    }
+
+    @FXML
+    void editHousingClick(ActionEvent event) {
+        try {
+            adsService.editHousingAd(getHousingAdFromTF(),selectedHousingAds.getId());
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+    }
+
+    @FXML
+    void deleteHousingClick(ActionEvent event) {
+        try {
+            adsService.deleteHousingAd(selectedHousingAds.getId());
+            tableViewRefresh();
+        } catch (Exception e ){
+            alertGenerator.generateAlert(e);
+        }
+    }
+
+    private HousingAds getHousingAdFromTF(){
+        try{
+            User user = userService.getUserByLogin(housingUserTF.getText()).get();
+            try{
+                HousingAds housingAds = HousingAds.builder()
+                        .user(user)
+                        .title(housingTitleTF.getText())
+                        .description(housingDescTF.getText())
+                        .price(Long.parseLong(housingPriceTF.getText()))
+                        .area(Long.parseLong(housingAreaTF.getText()))
+                        .type(housingTypeChoice.getValue())
+                        .build();
+                return housingAds;
+            } catch (Exception e){
+                alertGenerator.generateAlert(e);
+            }
+        } catch (Exception e){
+            alertGenerator.generateAlert(new Exception("User does not exists"));
+        }
+        return null;
     }
 
 
@@ -517,5 +890,4 @@ public class TableViewController implements Initializable {
         this.messageTitleTF.setText(message.getTitle());
         this.messageContentTF.setText(message.getContent());
     }
-
 }

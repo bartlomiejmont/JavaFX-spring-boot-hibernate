@@ -1,5 +1,6 @@
 package com.example.ogloszenia.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,8 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class ItemAds {

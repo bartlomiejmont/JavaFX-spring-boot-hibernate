@@ -1,5 +1,6 @@
 package com.example.ogloszenia.service;
 
+import com.example.ogloszenia.model.Adress;
 import com.example.ogloszenia.model.HousingAds;
 import com.example.ogloszenia.model.ItemAds;
 import com.example.ogloszenia.model.JobPosting;
@@ -44,6 +45,12 @@ public class AdsService {
                 });
     }
 
+    public void editHousingAd(HousingAds housingAds, Long id) {
+        housingAds.setId(id);
+        housingAdsRepository.findById(id)
+                .map(__ -> housingAdsRepository.save(housingAds));
+    }
+
     public List<ItemAds> getAllItemAds(){
         return itemAdsRepository.findAll();
     }
@@ -59,6 +66,12 @@ public class AdsService {
                     itemAdsRepository.deleteById(id);
                     return null;
                 });
+    }
+
+    public void editItemAd(ItemAds itemAd, Long id) {
+        itemAd.setId(id);
+        itemAdsRepository.findById(id)
+                .map(__ -> itemAdsRepository.save(itemAd));
     }
 
     public List<JobPosting> getAllJobPostings(){
@@ -78,6 +91,12 @@ public class AdsService {
                 });
     }
 
+    public void editJobPosting(JobPosting jobPosting, Long id) {
+        jobPosting.setId(id);
+        jobPostingRepository.findById(id)
+                .map(__ -> jobPostingRepository.save(jobPosting));
+    }
+
     public List<RentalAds> getAllRentalsAds(){
         return rentalAdsRepository.findAll();
     }
@@ -93,5 +112,11 @@ public class AdsService {
                     rentalAdsRepository.deleteById(id);
                     return null;
                 });
+    }
+
+    public void editRentalAd(RentalAds rentalAd, Long id) {
+        rentalAd.setId(id);
+        rentalAdsRepository.findById(id)
+                .map(__ -> rentalAdsRepository.save(rentalAd));
     }
 }
