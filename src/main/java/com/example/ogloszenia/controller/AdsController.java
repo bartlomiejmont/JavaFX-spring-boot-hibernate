@@ -42,13 +42,13 @@ public class AdsController implements Initializable {
 
 
     @Autowired
-    UserViewService userViewService;
+    private UserViewService userViewService;
 
     @Autowired
-    AdsService adsService;
+    private AdsService adsService;
 
     @Autowired
-    AlertGenerator alertGenerator;
+    private AlertGenerator alertGenerator;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
